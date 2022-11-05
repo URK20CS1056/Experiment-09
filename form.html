@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    ;
+    <script>
+      var app = angular.module('myapp',[]);
+      app.controller('mycontrol',function($scope){
+      $scope.passpattern = /^[a-zA-Z0-9]{5,10}$/;
+      $scope.agepattern = /^(?:1[8-9]|[2-5][0-9]|60)$/;
+      $scope.mobilepattern = /^[0-9]{10}$/;
+      })
+    </script>
+  </head>
+  <body ng-app="myapp" ng-controller="mycontrol">
+    <div class="container">
+      <h2>form Validation</h2>
+      <form name="myform">
+        <div>
+          <div>Name :</div>
+          <div>
+            <input type="text" name="name" ng-model="name" required />
+            
+            Name <span style="color:red;">* </span>
+         <ng-show=" myform.name.$dirty && myform.name.$error.required">Name is required..</span>
+          </div>
+        </div>
+        <div>
+          <div>Email :</div>
+          <div>
+            <input type="email" name="myemail" ng-model="myemail" required />
+            Email <span style="color:red;">* </span>
+            <span style="color:red;" 
+              ng-show="myform.myemail.$dirty && myform.myemail.$error.required">Email is required..</span
+            >
+            <span style="color:red;" 
+              ng-show="myform.myemail.$dirty && myform.myemail.$error.email">Email format is wrong..</span
+            >
+          </div>
+        </div>
+        <div>
+          <div>Password :</div>
+          <div>
+            <input
+              type="password"
+              name="pwd"
+              ng-model="pwd"
+              ng-pattern="passpattern"
+              required
+            />
+          </div>
+          Password <span style="color:red;">* </span>
+          <span style="color:red;" 
+            ng-show="myform.pwd.$dirty && myform.pwd.$error.required" >password is required..</span
+          >
+          <span style="color:red;" 
+            ng-show="myform.pwd.$dirty && myform.pwd.$error.pattern">Password format wrong..</span
+          >
+        </div>
+        <div>
+          <div>Age :</div>
+          <div>
+            <input
+              type="number"
+              ng-model="Age"
+              name="Age"
+              required
+              ng-pattern="agepattern"
+            />
+          </div>
+          Age <span style="color:red;">* </span>
+          <span style="color:red;" 
+            ng-show="myform.Age.$dirty && myform.Age.$error.required">Required</span
+          >
+          <span style="color:red;" 
+            ng-show="myform.Age.$dirty && myform.Age.$error.pattern">Invalid Age. Valid 18-60</span
+          >
+        </div>
+        <div>
+          <div>Mobile :</div>
+          <div>
+            <input
+              type="number"
+              ng-model="num"
+              name="num"
+              required
+              ng-pattern="mobilepattern"
+            />
+          </div>
+          Mobile <span style="color:red;">* </span>
+          <span style="color:red;" 
+            ng-show="myform.num.$dirty && myform.num.$error.required">Mobile Number is required</span
+          >
+          <span style="color:red;" 
+            ng-show="myform.num.$dirty && myform.num.$error.pattern">Please, Enter 10 digit Mobile Number</span
+          >
+        </div>
+        <div>
+          <div>gender :</div>
+          <div>
+            <input
+              type="radio"
+              name="gender"
+              ng-model="gender"
+              value="Male"
+              required
+            />Male
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="gender"
+              ng-model="gender"
+              value="Female"
+              required
+            />Female
+          </div>
+          Gender <span style="color:red;">* </span>
+          <span style="color:red;" 
+            ng-show="myform.gender.$dirty && myform.gender.$error.required">gender is required</span
+          >
+        </div>
+        <div>
+          <div></div>
+          <div>
+            <input
+              type="submit"
+              ng-disabled=" myform.myemail.$invalid || myform.name.$invalid || myform.age.$invalid "
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
